@@ -1,0 +1,31 @@
+<div class="my-modal">
+    <div class="modal-header">
+        <h4 class="modal-title">Add new Team</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-group form-group-name">
+            <p class="title">Team name</p>
+            <input type="text" class="form-control" placeholder="Enter name" [ngModel]="team.name" (ngModelChange)="setTeamName($event)">
+            <div class="row">
+                <p class="validator col">{{nameMessageError}}</p>
+                <p class="name-length-per-max col">{{nameLength}}/225</p>
+            </div>
+        </div>
+        <div class="form-group form-group-team">
+            <p class="title">Team manager *</p>
+            <div ngbDropdown class="drop-down">
+                <input type="text" class="form-control" id="employeeList" ngbDropdownToggle [ngModel]="employeeName" (ngModelChange)="getEmployeeByName($event)">
+                <div class="team-list" ngbDropdownMenu aria-labelledby="team">
+                    <div *ngFor="let employee of employeeList">
+                        <button (click)="setTeamManager(employee.id, employee.fullName)" ngbDropdownItem>{{employee.fullName}}</button>
+                    </div>
+                </div>
+            </div>
+            <p class="validator col">{{teamManagerMessageError}}</p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="saveTeam()">SUBMIT</button>
+        <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">CANCEL</button>
+    </div>
+</div>
